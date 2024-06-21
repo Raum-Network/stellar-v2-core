@@ -10,7 +10,7 @@ mod storage;
 mod balances;
 mod event;
 mod error;
-mod factoryerror;
+mod factory_error;
 mod math;
 mod strings;
 mod contract_interface;

@@ -2,7 +2,7 @@
 use soroban_sdk::{contractclient, contractspecfn, Address, Env , BytesN};
 
 
-pub use crate::factoryerror::FactoryError;
+pub use crate::factory_error::FactoryError;
 pub struct Spec;
 
 /// Interface for RaumFiFactory

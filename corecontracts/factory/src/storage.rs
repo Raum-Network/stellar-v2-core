@@ -1,5 +1,5 @@
 use soroban_sdk::{contracttype, Address, BytesN, Env, Val, TryFromVal};
-use crate::factoryerror::FactoryError;
+use crate::factory_error::FactoryError;
 use crate::pair::Pair;
 
 #[derive(Clone)]

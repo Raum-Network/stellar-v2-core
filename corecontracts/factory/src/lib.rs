@@ -4,7 +4,7 @@ mod event;
 mod pair;
 mod storage;
 mod contract_interface;
-mod factoryerror;
+mod factory_error;
 
 use soroban_sdk::{
     contract,
@@ -12,11 +12,11 @@ use soroban_sdk::{
     Address, BytesN, Env,
 };
 use contract_interface::RaumFiFactoryTrait;
-use factoryerror::FactoryError;
+use factory_error::FactoryError;
 use pair::{create_contract, Pair, IdenticalPairError};
 use storage::*;
 
-impl From<IdenticalPairError> for FactoryError {
+impl From<IdenticalPairError> for factory_error {
     fn from(pair_error: IdenticalPairError) -> Self {
         match pair_error {
             IdenticalPairError::CreatePairIdenticalTokens => FactoryError::CreatePairIdenticalTokens,
@@ -196,7 +196,7 @@ fn create_pair(e: Env, token_a: Address, token_b: Address) -> Result<Address, Fa
     let token_pair = Pair::new(token_a, token_b)?;
 
     if get_pair_exists(&e, token_pair.clone()) {
-        return Err(FactoryError::CreatePairAlreadyExists);
+        return Err(factory_error::CreatePairAlreadyExists);
     }
 
     let pair_wasm_hash = get_pair_wasm_hash(&e)?;

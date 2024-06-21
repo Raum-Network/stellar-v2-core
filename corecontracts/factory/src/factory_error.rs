@@ -3,7 +3,7 @@ use soroban_sdk::{self, contracterror};
 #[contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
 #[repr(u32)]
-pub enum FactoryError {
+pub enum factory_error {
     /// RaumFiFactory: not yet initialized
     NotInitialized = 201,
 
