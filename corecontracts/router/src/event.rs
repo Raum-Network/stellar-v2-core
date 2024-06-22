@@ -13,7 +13,7 @@ pub(crate) fn initialized(e: &Env, factory: Address) {
     let event: InitializedEvent = InitializedEvent {
         factory: factory
     };
-    e.events().publish(("RaumFiRouter", symbol_short!("initialized router")), event);
+    e.events().publish(("RaumFiRouter", symbol_short!("initialized_router")), event);
 }
 
 // ADD LIQUIDITY EVENT
@@ -51,7 +51,7 @@ pub(crate) fn add_liquidity(
         to,
     };
 
-    e.events().publish(("RaumFiRouter", symbol_short!("add liquidity event")), event);
+    e.events().publish(("RaumFiRouter", symbol_short!("add_liquidity_event")), event);
 }
 
  
@@ -92,7 +92,7 @@ pub(crate) fn remove_liquidity(
         to,
     };
 
-    e.events().publish(("RaumFiRouter", symbol_short!("remove liquidity event")), event);
+    e.events().publish(("RaumFiRouter", symbol_short!("remove_liquidity_event")), event);
 }
 
 
@@ -120,5 +120,5 @@ pub(crate) fn swap(
         to,
     };
 
-    e.events().publish(("RaumFiRouter", symbol_short!("swap event")), event);
+    e.events().publish(("RaumFiRouter", symbol_short!("swap_event")), event);
 }

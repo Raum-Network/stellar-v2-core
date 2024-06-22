@@ -13,7 +13,7 @@ pub(crate) fn initialized(e: &Env, setter: Address) {
     let event: InitializedEvent = InitializedEvent {
         setter: setter
     };
-    e.events().publish(("RaumFiFactory", symbol_short!("init")), event);
+    e.events().publish(("RaumFiFactory", symbol_short!("initialize_factory")), event);
 }
 
 // NEW PAIR CREATED EVENT: new_pair

@@ -30,7 +30,7 @@ pub(crate) fn deposit(
         new_reserve_0: new_reserve_0,
         new_reserve_1: new_reserve_1
     };
-    e.events().publish(("RaumFiPair", symbol_short!("deposit")), event);
+    e.events().publish(("RaumFiPair", symbol_short!("deposit_pair_event")), event);
 }
 
 
@@ -61,7 +61,7 @@ pub(crate) fn swap(
         amount_0_out: amount_0_out,
         amount_1_out: amount_1_out,
     };
-    e.events().publish(("RaumFiPair", symbol_short!("swap")), event);
+    e.events().publish(("RaumFiPair", symbol_short!("swap_pair_event")), event);
 }
 
 // WITHDRAW EVENT
@@ -95,7 +95,7 @@ pub(crate) fn withdraw(
         new_reserve_0: new_reserve_0,
         new_reserve_1: new_reserve_1,
     };
-    e.events().publish(("RaumFiPair", symbol_short!("withdraw")), event);
+    e.events().publish(("RaumFiPair", symbol_short!("withdraw_pair_event")), event);
 }
 
 // SYNC EVENT
@@ -112,5 +112,5 @@ pub(crate) fn sync(e: &Env, new_reserve_0: i128, new_reserve_1: i128) {
         new_reserve_0: new_reserve_0,
         new_reserve_1: new_reserve_1,
     };
-    e.events().publish(("RaumFiPair", symbol_short!("sync")), event);
+    e.events().publish(("RaumFiPair", symbol_short!("sync_event")), event);
 }
