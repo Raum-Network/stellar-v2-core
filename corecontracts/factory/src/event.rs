@@ -1,5 +1,5 @@
 //! Definition of the Events used in the contract
-use soroban_sdk::{contracttype, symbol_short, Env, Address};
+use soroban_sdk::{contracttype, Symbol, Env, Address};
 
 // INITIALIZED
 #[contracttype]
@@ -13,7 +13,7 @@ pub(crate) fn initialized(e: &Env, setter: Address) {
     let event: InitializedEvent = InitializedEvent {
         setter: setter
     };
-    e.events().publish(("RaumFiFactory", symbol_short!("initialize_factory")), event);
+    e.events().publish(("RaumFiFactory", Symbol::new(e , "initialize_factory_contract")), event);
 }
 
 // NEW PAIR CREATED EVENT: new_pair
@@ -39,5 +39,5 @@ pub(crate) fn new_pair(
         token_1: token_1,
         new_pairs_length: new_pairs_length,
     };
-    e.events().publish(("RaumFiFactory", symbol_short!("new_pair")), event);
+    e.events().publish(("RaumFiFactory", Symbol::new(e , "new_pair_created")), event);
 }
