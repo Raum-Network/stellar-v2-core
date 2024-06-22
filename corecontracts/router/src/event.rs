@@ -1,5 +1,5 @@
 //! Definition of the Events used in the contract
-use soroban_sdk::{contracttype, symbol_short, Env, Address, Vec};
+use soroban_sdk::{contracttype, Symbol, Env, Address, Vec};
 
 // INITIALIZED
 #[contracttype]
@@ -13,7 +13,7 @@ pub(crate) fn initialized(e: &Env, factory: Address) {
     let event: InitializedEvent = InitializedEvent {
         factory: factory
     };
-    e.events().publish(("RaumFiRouter", symbol_short!("initialized_router")), event);
+    e.events().publish(("RaumFiRouter", Symbol::new(e ,"initialized_router_contract")), event);
 }
 
 // ADD LIQUIDITY EVENT
@@ -51,7 +51,7 @@ pub(crate) fn add_liquidity(
         to,
     };
 
-    e.events().publish(("RaumFiRouter", symbol_short!("add_liquidity_event")), event);
+    e.events().publish(("RaumFiRouter", Symbol::new(e , "add_liquidity_event")), event);
 }
 
  
@@ -92,7 +92,7 @@ pub(crate) fn remove_liquidity(
         to,
     };
 
-    e.events().publish(("RaumFiRouter", symbol_short!("remove_liquidity_event")), event);
+    e.events().publish(("RaumFiRouter", Symbol::new(e , "remove_liquidity_event")), event);
 }
 
 
@@ -120,5 +120,5 @@ pub(crate) fn swap(
         to,
     };
 
-    e.events().publish(("RaumFiRouter", symbol_short!("swap_event")), event);
+    e.events().publish(("RaumFiRouter", Symbol::new(e , "swap_tokens_event")), event);
 }
