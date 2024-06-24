@@ -14,6 +14,7 @@ mod reserves;
 mod quotes;
 mod tokens;
 mod math;
+mod test;
 
 use factory::RaumFiFactoryClient;
 use pair::PairClient;

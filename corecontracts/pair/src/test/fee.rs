@@ -112,36 +112,24 @@ fn fee_on_add_swap_add() {
 
     assert_eq!(test.contract.k_multiplier(), (new_expected_reserve_0+new_amount_0).checked_mul(new_expected_reserve_1+new_amount_1).unwrap());
     
-    // We have the new liquidity minted to the admin = n
-    // n = expected_liquidity*(k2_root-k1_root)/(5k2_root + k1_root)
-    // = 2946,719213655 --> 2946
+    
     let n = 2946;
-    let numerator = expected_liquidity.checked_mul(k2_root-k1_root).unwrap(); //1250447629752
+    let numerator = expected_liquidity.checked_mul(k2_root-k1_root).unwrap();
     assert_eq!(numerator, 1250447629752);
     let denominator = (5_i128).checked_mul(k2_root).unwrap().checked_add(k1_root).unwrap();
     assert_eq!(denominator, 424352488);
     assert_eq!(n, numerator/denominator);
     assert_eq!(numerator.checked_div(denominator).unwrap(), n);
 
-    // We have the new liquidity minted to the user:
-    /*
-        lets check new LP balance:
-
-        let shares_a = (amount_0.checked_mul(total_supply).unwrap()).checked_div(reserve_0).unwrap();
-        let shares_b = (amount_1.checked_mul(total_supply).unwrap()).checked_div(reserve_1).unwrap();
-        shares_a.min(shares_b)
-    */
-
-    // shares_0 = (1000000 * (70710678+2946)) / 60000000 = 1178560
+    
     let shares_0 = 1178560; //new_amount_0 * (expected_liquidity+n) / new_expected_reserve_0;
     assert_eq!(shares_0, (new_amount_0 * (expected_liquidity+n)) / new_expected_reserve_0);
 
 
-    // (1389583 * (70710678+2946)) / 83375021 = 1178559
-    let shares_1 = 1178559; //new_amount_1 * (expected_liquidity+n) / new_expected_reserve_1;
+    
+    let shares_1 = 1178559;
     assert_eq!(shares_1, (new_amount_1 * (expected_liquidity+n)) / new_expected_reserve_1);
 
-    // min (shares_0, shares_1) = 1178559;
     let expected_minted_liquidity = 1178559;
     assert_eq!(new_got_liquidity, expected_minted_liquidity);
 

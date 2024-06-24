@@ -30,7 +30,6 @@ fn deposit_only_token_0_sent() {
 fn deposit_insufficient_first_liquidity() {
     let test = RaumFiPairTest::setup();
     test.env.budget().reset_unlimited();
-    // If we just send 1,000 of each, the liq to be minted will be sqrt(1000*1000) - 1000 = 0, not enough
     let amount_0: i128 = 1_00;
     let amount_1: i128 = 1_00;
     test.contract.initialize(&test.factory.address, &test.token_0.address, &test.token_1.address);
@@ -46,7 +45,7 @@ fn deposit_insufficient_first_liquidity() {
 fn deposit_sufficient_first_liquidity() {
     let test = RaumFiPairTest::setup();
     test.env.budget().reset_unlimited();
-    // If we just send 1,000 of each, the liq to be minted will be sqrt(1000*1000) - 1000 = 0, not enough
+    
     let amount_0: i128 = 1_001; //
     let amount_1: i128 = 1_001; //
     test.contract.initialize(&test.factory.address, &test.token_0.address, &test.token_1.address);
