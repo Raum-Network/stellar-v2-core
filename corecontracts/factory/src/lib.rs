@@ -4,7 +4,8 @@ mod event;
 mod pair;
 mod storage;
 mod contract_interface;
-mod factoryerror;
+mod factory_error;
+mod test;
 
 use soroban_sdk::{
     contract,
@@ -12,7 +13,7 @@ use soroban_sdk::{
     Address, BytesN, Env,
 };
 use contract_interface::RaumFiFactoryTrait;
-use factoryerror::FactoryError;
+use factory_error::FactoryError;
 use pair::{create_contract, Pair, IdenticalPairError};
 use storage::*;
 

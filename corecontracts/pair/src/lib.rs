@@ -18,7 +18,7 @@ mod contract_interface;
 // ANY TOKEN CONTRACT
 // TODO: Simplify this and use a any_token_interface
 pub mod any_token {
-    soroban_sdk::contractimport!(file = "D:/rntoken/soroban-amm/target/wasm32-unknown-unknown/release/rntoken.wasm");
+    soroban_sdk::contractimport!(file = "../token/target/wasm32-unknown-unknown/release/rntoken.wasm");
     pub type TokenClient<'a> = Client<'a>;
 }
 
