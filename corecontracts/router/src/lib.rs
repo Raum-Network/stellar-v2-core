@@ -16,7 +16,7 @@ mod tokens;
 mod math;
 
 use factory::RaumFiFactoryClient;
-use pair::RaumFiPairClient;
+use pair::PairClient;
 use storage::{put_factory, has_factory, get_factory, extend_instance_ttl};
 pub use error::{RaumFiRouterError, RouterErrorsForLibrary};
 
@@ -75,7 +75,7 @@ fn add_liquidity_amounts(
 
     let (token_0,token_1) = sort_tokens(token_a.clone(), token_b.clone())?;
     let pair_address = pair_for(e.clone(), factory.clone(), token_0.clone(), token_1.clone())?;
-    let pair_client = RaumFiPairClient::new(&e, &pair_address);
+    let pair_client = PairClient::new(&e, &pair_address);
     let (reserve_0, reserve_1) = pair_client.get_reserves();
     
     let (reserve_a, reserve_b) =
@@ -147,7 +147,7 @@ fn swap(e: &Env, factory_address: &Address, amounts: &Vec<i128>, path: &Vec<Addr
             _to.clone()
         };
 
-        RaumFiPairClient::new(
+        PairClient::new(
             &e,
             &pair_for(e.clone(), factory_address.clone(), input, output)?,
         )
@@ -296,7 +296,7 @@ impl RaumFiRouterTrait for RaumFiRouter {
         TokenClient::new(&e, &token_a).transfer(&to, &pair, &amount_a);
         TokenClient::new(&e, &token_b).transfer(&to, &pair, &amount_b);
 
-        let liquidity = RaumFiPairClient::new(&e, &pair).deposit(&to);
+        let liquidity = PairClient::new(&e, &pair).deposit(&to);
 
         event::add_liquidity(
             &e,
@@ -357,7 +357,7 @@ impl RaumFiRouterTrait for RaumFiRouter {
         TokenClient::new(&e, &pair).transfer(&to, &pair, &liquidity);
         
         // Withdraw paired tokens from the pool
-        let (amount_0, amount_1) = RaumFiPairClient::new(&e, &pair).withdraw(&to);
+        let (amount_0, amount_1) = PairClient::new(&e, &pair).withdraw(&to);
 
         // Sort tokens to match the expected order
         let (token_0, _token_1) = sort_tokens(token_a.clone(), token_b.clone())?;

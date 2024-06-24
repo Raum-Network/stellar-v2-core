@@ -26,7 +26,7 @@ use core::mem;
 
 mod pair {
     soroban_sdk::contractimport!(file = "../pair/target/wasm32-unknown-unknown/release/raumfi_pair.wasm");
-    pub type RaumFiPairClient<'a> = Client<'a>;
+    pub type PairClient<'a> = Client<'a>;
 }
 mod token {
     soroban_sdk::contractimport!(file = "../token/target/wasm32-unknown-unknown/release/rntoken.wasm");
@@ -36,7 +36,7 @@ mod factory {
     soroban_sdk::contractimport!(file = "./target/wasm32-unknown-unknown/release/raumfi_factory.wasm");
     pub type _RaumFiFactoryClient<'a> = Client<'a>; 
 }
-use pair::RaumFiPairClient;
+use pair::PairClient;
 use token::TokenClient;
 use crate::{ RaumFiFactory, RaumFiFactoryClient};
 
@@ -47,7 +47,7 @@ struct RaumFiFactoryTest<'a> {
     factory: RaumFiFactoryClient<'a>,
     token_0: TokenClient<'a>,
     token_1: TokenClient<'a>,
-    pair: RaumFiPairClient<'a>
+    pair: PairClient<'a>
 }
 
 impl<'a> RaumFiFactoryTest<'a> {
@@ -72,7 +72,7 @@ impl<'a> RaumFiFactoryTest<'a> {
         factory.initialize(&alice, &pair_hash);
         factory.create_pair(&token_0.address, &token_1.address);
         let pair_address = factory.get_pair(&token_0.address, &token_1.address);
-        let pair = RaumFiPairClient::new(&env, &pair_address);
+        let pair = PairClient::new(&env, &pair_address);
 
         RaumFiFactoryTest {
             env,

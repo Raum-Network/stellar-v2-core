@@ -30,9 +30,9 @@ fn pair_token_wasm(e: &Env) -> BytesN<32> {
 // **** PAIR CONTRACT ****
 mod pair {
     soroban_sdk::contractimport!(file = "../pair/target/wasm32-unknown-unknown/release/raumfi_pair.wasm");
-    pub type RaumFiPairClient<'a> = Client<'a>;
+    pub type PairClient<'a> = Client<'a>;
 }
-use pair::RaumFiPairClient;
+use pair::PairClient;
 
 
 //  **** FACTORY CONTRACT **** 

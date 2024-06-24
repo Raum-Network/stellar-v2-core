@@ -10,10 +10,11 @@ mod storage;
 mod balances;
 mod event;
 mod error;
-mod factoryerror;
+mod factory_error;
 mod math;
 mod strings;
 mod contract_interface;
+mod test;
 
 // ANY TOKEN CONTRACT
 // TODO: Simplify this and use a any_token_interface
@@ -168,7 +169,7 @@ impl PairTrait for Pair {
         extend_instance_ttl(&e);
         
         if !has_token_0(&e){
-            panic!("Already Initialized!!!")
+            panic!("Not Initialized!!!")
         }
 
         let (mut reserve_0, mut reserve_1) = (get_reserve_0(&e), get_reserve_1(&e));
@@ -239,7 +240,7 @@ impl PairTrait for Pair {
         extend_instance_ttl(&e);
 
         if !has_token_0(&e) {
-            panic!("Already Initialized!!!")
+            panic!("Not Initialized!!!")
         }
     
         let (reserve_0, reserve_1) = (get_reserve_0(&e), get_reserve_1(&e));
@@ -315,7 +316,7 @@ impl PairTrait for Pair {
         extend_instance_ttl(&e);
 
         if !has_token_0(&e) {
-            panic!("Already Initialized!!!")
+            panic!("Not Initialized!!!")
         }
     
         let balance_shares = get_lp_token_balance(&e);

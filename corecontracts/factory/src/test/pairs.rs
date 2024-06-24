@@ -1,4 +1,4 @@
-use crate::test::{RaumFiFactoryTest, RaumFiPairClient};
+use crate::test::{RaumFiFactoryTest, PairClient};
 use soroban_sdk::{xdr::{ToXdr},
     Bytes,
 };
@@ -35,7 +35,7 @@ fn create_pair_one_way() {
     let get_pair_0 = test.contract.all_pairs(&0);
     assert_eq!(pair_address, get_pair_0);
 
-    let pair_client = RaumFiPairClient::new(&test.env, &pair_address);
+    let pair_client = PairClient::new(&test.env, &pair_address);
     assert_eq!(pair_client.factory(), test.contract.address);
 
     assert_eq!(&pair_client.token_0(), &test.token_0.address);
