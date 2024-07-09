@@ -11,7 +11,7 @@ tasks:
 
   build:
     cmds:
-      - soroban contract build --package soroban-token-contract
+      - soroban contract build --package rntoken
       - soroban contract optimize --wasm ../target/wasm32-unknown-unknown/release/rntoken.wasm --wasm-out ../target/wasm32-unknown-unknown/release/rntoken.wasm
       - ls -l ../target/wasm32-unknown-unknown/release/*.wasm
 
