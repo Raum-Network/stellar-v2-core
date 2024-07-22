@@ -53,14 +53,11 @@ pub fn spend_allowance(e: &Env, from: Address, spender: Address, amount: i128) {
     if allowance.amount < amount {
         panic!("insufficient allowance");
     }
+
+    let new_allowance = allowance.amount.checked_sub(amount).expect("integer underflow");
+    
     if amount > 0 {
-        write_allowance(
-            e,
-            from,
-            spender,
-            allowance.amount - amount,
-            allowance.expiration_ledger,
-        );
+        write_allowance(e, from, spender, new_allowance, allowance.expiration_ledger);
     }
 
 }

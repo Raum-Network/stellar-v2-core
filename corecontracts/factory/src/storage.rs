@@ -130,7 +130,7 @@ pub fn add_pair_to_all_pairs(e: &Env, pair_address: &Address) {
     e.storage()
         .persistent()
         .extend_ttl(&key, PERSISTENT_LIFETIME_THRESHOLD, PERSISTENT_BUMP_AMOUNT);
-    total_pairs += 1;
+    total_pairs = total_pairs.checked_add(1).expect("Integer Overflow");
     put_total_pairs(e, total_pairs);
 }
 
