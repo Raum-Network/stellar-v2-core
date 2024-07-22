@@ -27,7 +27,9 @@ pub fn read_balance(e: &Env, addr: Address) -> i128 {
 
 pub fn receive_balance(e: &Env, addr: Address, amount: i128) {
     let balance = read_balance(e, addr.clone());
-    write_balance(e, addr, balance + amount);
+    let new_balance = balance.checked_add(amount)
+        .expect("Integer overflow occurred");
+    write_balance(e, addr, new_balance);
 }
 
 pub fn spend_balance(e: &Env, addr: Address, amount: i128) {
@@ -35,5 +37,6 @@ pub fn spend_balance(e: &Env, addr: Address, amount: i128) {
     if balance < amount {
         panic_with_error!(&e, TokenError::InsufficientBalance);
     }
-    write_balance(e, addr, balance - amount);
+    let new_balance = balance.checked_sub(amount).expect("Integer underflow occurred");
+    write_balance(e, addr, new_balance);
 }
